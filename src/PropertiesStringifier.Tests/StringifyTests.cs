@@ -15,6 +15,8 @@ namespace PropertiesStringifier.Tests
                 Age = 38,
                 BirthDate = new DateTime(1981, 06, 09),
                 DeathDate = null,
+                IsDead = false,
+                LatestIntervewDatetime = new DateTime(2019, 05, 18, 12, 15, 16),
                 Movies = new string[]
                 {
                     "Black Swan",
@@ -40,7 +42,15 @@ namespace PropertiesStringifier.Tests
             };
 
             string stringifiedProperties = obj.StringifyProperties();
-            Assert.AreEqual("Name: Natalie Portman Age: 38 IsDead: False BirthDate: 1981-06-09 DeathDate: null MoviesCount: 5 NominationsCount: 3 MainMediaType: Movies", stringifiedProperties);
+            Assert.AreEqual("Name: Natalie Portman Age: 38 IsDead: False BirthDate: 1981-06-09 DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3 MainMediaType: Movies", stringifiedProperties);
+        }
+
+        [Test]
+        public void ExceptionTest()
+        {
+            Actress obj = null;
+            string stringifiedProperties = obj.StringifyProperties();
+            Assert.IsTrue(stringifiedProperties.Contains("Failed to stringify properties"));
         }
     }
 
@@ -48,9 +58,10 @@ namespace PropertiesStringifier.Tests
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public bool IsDead => DeathDate != null;
+        public bool IsDead { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
+        public DateTime LatestIntervewDatetime { get; set; }
         public string[] Movies { get; set; }
         public List<string> Nominations { get; set; }
         public MainMediaTypeEnum MainMediaType { get; set; }

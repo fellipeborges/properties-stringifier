@@ -14,19 +14,26 @@ namespace PropertiesStringifier
         /// </summary>
         public static string StringifyProperties(this object obj)
         {
-            string stringifiedProperties =
-                obj
-                    .GetType()
-                    .GetProperties()
-                    .ToList()
-                    .Select(p => GetPropertyData(obj, p))
-                    .Where(p => !p.IsUserDefinedType)
-                    .Select(propertyData => GetNameValueByClassification(propertyData).ToString())
-                    .Aggregate("", (prev, next) => $"{prev} {next}")
-                    .ToString()
-                    .Trim();
+            try
+            {
+                string stringifiedProperties =
+                    obj
+                        .GetType()
+                        .GetProperties()
+                        .ToList()
+                        .Select(p => GetPropertyData(obj, p))
+                        .Where(p => !p.IsUserDefinedType)
+                        .Select(propertyData => GetNameValueByClassification(propertyData).ToString())
+                        .Aggregate("", (prev, next) => $"{prev} {next}")
+                        .ToString()
+                        .Trim();
 
-            return stringifiedProperties;
+                return stringifiedProperties;
+            }
+            catch (Exception ex)
+            {
+                return $"Failed to stringify properties: {ex.Message}";
+            }
         }
 
         /// <summary>
@@ -78,7 +85,7 @@ namespace PropertiesStringifier
         }
 
         /// <summary>
-        /// Tries to parse the value as a date and if successfull returns it in the format "yyyy-MM-dd".
+        /// Tries to parse the value as a date and if successfull returns it in the format "yyyy-MM-dd" or "yyyy-MM-dd hh:mm:ss".
         /// Otherwise returns the input value itself.
         /// </summary>
         private static NameValue GetDatetimeValue(PropertyData propertyData)
@@ -86,7 +93,13 @@ namespace PropertiesStringifier
             string valueToShow = propertyData.Value.ToString();
             if (DateTime.TryParse(valueToShow, out DateTime resultDate))
             {
-                valueToShow = resultDate.ToString("yyyy-MM-dd");
+                string format = "yyyy-MM-dd hh:mm:ss";
+                if (resultDate.Hour == 0 && resultDate.Minute == 0 && resultDate.Second == 0)
+                {
+                    format = "yyyy-MM-dd";
+                }
+
+                valueToShow = resultDate.ToString(format);
             }
 
             return new NameValue
@@ -141,7 +154,7 @@ namespace PropertiesStringifier
         {
             object value = property.GetValue(obj, null);
             string typeName = property.PropertyType.ToString().ToLower();
-            
+
             if (value == null)
             {
                 return PropertyClassification.NullValue;

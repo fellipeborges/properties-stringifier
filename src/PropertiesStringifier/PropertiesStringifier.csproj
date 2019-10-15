@@ -11,8 +11,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://raw.githubusercontent.com/fellipeborges/properties-stringifier/master/img/properties-stringifier-icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/fellipeborges/properties-stringifier</PackageProjectUrl>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
   </PropertyGroup>
 
 </Project>
