@@ -20,12 +20,13 @@ namespace PropertiesStringifier
                     .GetProperties()
                     .ToList()
                     .Select(p => GetPropertyData(obj, p))
-                    .Where(p => p.Classification != PropertyClassification.UserDefinedType)
+                    .Where(p => !p.IsUserDefinedType)
                     .Select(propertyData => GetNameValueByClassification(propertyData).ToString())
-                    .Aggregate(new StringBuilder(), (prev, next) => prev.Append($" {next}"))
-                    .ToString();
+                    .Aggregate("", (prev, next) => $"{prev} {next}")
+                    .ToString()
+                    .Trim();
 
-            return stringifiedProperties.Trim();
+            return stringifiedProperties;
         }
 
         /// <summary>
@@ -36,7 +37,6 @@ namespace PropertiesStringifier
             var nameValue = propertyData.Classification switch
             {
                 PropertyClassification.Default => GetDefaultValue(propertyData),
-                PropertyClassification.UserDefinedType => GetDefaultValue(propertyData),
                 PropertyClassification.NullValue => GetNullValue(propertyData),
                 PropertyClassification.Datetime => GetDatetimeValue(propertyData),
                 PropertyClassification.Array => GetArrayValue(propertyData),
@@ -129,6 +129,7 @@ namespace PropertiesStringifier
             {
                 Name = property.Name,
                 Value = property.GetValue(obj, null),
+                IsUserDefinedType = GetIfIsUserDefinedType(obj, property),
                 Classification = GetPropertyClassification(obj, property)
             };
         }
@@ -140,15 +141,8 @@ namespace PropertiesStringifier
         {
             object value = property.GetValue(obj, null);
             string typeName = property.PropertyType.ToString().ToLower();
-            bool isUserDefinedType =
-                property.PropertyType.IsClass &&
-                property.PropertyType.Assembly.FullName == obj.GetType().Assembly.FullName;
-
-            if (isUserDefinedType)
-            {
-                return PropertyClassification.UserDefinedType;
-            }
-            else if (value == null)
+            
+            if (value == null)
             {
                 return PropertyClassification.NullValue;
             }
@@ -168,5 +162,16 @@ namespace PropertiesStringifier
             return PropertyClassification.Default;
         }
 
+        /// <summary>
+        /// Returns the property classification based on its value and type.
+        /// </summary>
+        private static bool GetIfIsUserDefinedType(object obj, PropertyInfo property)
+        {
+            bool isUserDefinedType =
+                property.PropertyType.IsClass &&
+                property.PropertyType.Assembly.FullName == obj.GetType().Assembly.FullName;
+
+            return isUserDefinedType;
+        }
     }
 }

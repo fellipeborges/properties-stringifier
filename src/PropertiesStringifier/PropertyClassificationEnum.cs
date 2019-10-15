@@ -3,10 +3,9 @@
     enum PropertyClassification
     {
         Default = 0,
-        UserDefinedType = 1,
-        NullValue = 2,
-        Datetime = 3,
-        Array = 4,
-        List = 5
+        NullValue = 1,
+        Datetime = 2,
+        Array = 3,
+        List = 4
     }
 }
