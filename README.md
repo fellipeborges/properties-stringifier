@@ -28,4 +28,15 @@ public class Actress
 }
 ```
 
-That's all.
+## Installation
+Package Manager
+
+`
+Install-Package PropertiesStringifier
+`
+
+.NET CLI
+
+`
+dotnet add package PropertiesStringifier
+`
