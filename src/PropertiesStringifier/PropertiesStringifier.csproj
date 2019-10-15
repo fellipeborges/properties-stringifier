@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Fellipe Borges</Authors>
+    <Product>Properties Stringifier</Product>
+    <Description>A very simple extension method to stringify your model class properties and help in debugging.</Description>
+    <RepositoryUrl>https://github.com/fellipeborges/properties-stringifier</RepositoryUrl>
+    <PackageTags>debug;help;model;class;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://github.com/fellipeborges/properties-stringifier/img/properties-stringifier-icon.png</PackageIconUrl>
   </PropertyGroup>
 
 </Project>
