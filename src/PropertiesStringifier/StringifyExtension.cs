@@ -14,24 +14,15 @@ namespace PropertiesStringifier
         /// </summary>
         public static string StringifyProperties(this object obj)
         {
-            string stringifiedProperties = 
+            string stringifiedProperties =
                 obj
                     .GetType()
                     .GetProperties()
                     .ToList()
-                    .Select(p =>
-                    {
-                        var propertyData = GetPropertyData(obj, p);
-                        return propertyData;
-                    })
+                    .Select(p => GetPropertyData(obj, p))
                     .Where(p => p.Classification != PropertyClassification.UserDefinedType)
-                    .ToList()
-                    .Select(propertyData =>
-                    {
-                        var nameValue = GetNameValueByClassification(propertyData);
-                        return nameValue.ToString();
-                    })
-                    .Aggregate(new StringBuilder(), (prev, next) => prev.Append(" " + next))
+                    .Select(propertyData => GetNameValueByClassification(propertyData).ToString())
+                    .Aggregate(new StringBuilder(), (prev, next) => prev.Append($" {next}"))
                     .ToString();
 
             return stringifiedProperties.Trim();
@@ -42,27 +33,18 @@ namespace PropertiesStringifier
         /// </summary>
         private static NameValue GetNameValueByClassification(PropertyData propertyData)
         {
-            switch (propertyData.Classification)
+            var nameValue = propertyData.Classification switch
             {
-                case PropertyClassification.Default:
-                case PropertyClassification.UserDefinedType:
-                    return GetDefaultValue(propertyData);
+                PropertyClassification.Default => GetDefaultValue(propertyData),
+                PropertyClassification.UserDefinedType => GetDefaultValue(propertyData),
+                PropertyClassification.NullValue => GetNullValue(propertyData),
+                PropertyClassification.Datetime => GetDatetimeValue(propertyData),
+                PropertyClassification.Array => GetArrayValue(propertyData),
+                PropertyClassification.List => GetListValue(propertyData),
+                _ => GetDefaultValue(propertyData)
+            };
 
-                case PropertyClassification.NullValue:
-                    return GetNullValue(propertyData);
-
-                case PropertyClassification.Datetime:
-                    return GetDatetimeValue(propertyData);
-
-                case PropertyClassification.Array:
-                    return GetArrayValue(propertyData);
-
-                case PropertyClassification.List:
-                    return GetListValue(propertyData);
-
-                default:
-                    return GetDefaultValue(propertyData);
-            }
+            return nameValue;
         }
 
         /// <summary>
