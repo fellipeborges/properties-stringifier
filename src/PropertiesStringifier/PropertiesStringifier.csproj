@@ -1,15 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Fellipe Borges</Authors>
     <Product>Properties Stringifier</Product>
     <Description>A very simple extension method to stringify your model class properties and help in debugging.</Description>
     <RepositoryUrl>https://github.com/fellipeborges/properties-stringifier</RepositoryUrl>
-    <PackageTags>debug;help;model;class;</PackageTags>
+    <PackageTags>debug;help;stringify;</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://github.com/fellipeborges/properties-stringifier/img/properties-stringifier-icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/fellipeborges/properties-stringifier/master/img/properties-stringifier-icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/fellipeborges/properties-stringifier</PackageProjectUrl>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
   </PropertyGroup>
 
 </Project>

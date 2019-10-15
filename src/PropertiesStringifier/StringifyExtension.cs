@@ -28,16 +28,7 @@ namespace PropertiesStringifier
                     .ToList()
                     .Select(propertyData =>
                     {
-                        var nameValue = propertyData.Classification switch
-                        {
-                            PropertyClassification.Default => GetDefaultValue(propertyData),
-                            PropertyClassification.NullValue => GetNullValue(propertyData),
-                            PropertyClassification.Datetime => GetDatetimeValue(propertyData),
-                            PropertyClassification.Array => GetArrayValue(propertyData),
-                            PropertyClassification.List => GetListValue(propertyData),
-                            _ => GetDefaultValue(propertyData),
-                        };
-
+                        var nameValue = GetNameValueByClassification(propertyData);
                         return nameValue.ToString();
                     })
                     .Aggregate(new StringBuilder(), (prev, next) => prev.Append(" " + next))
@@ -47,9 +38,37 @@ namespace PropertiesStringifier
         }
 
         /// <summary>
+        /// Returns an instance of NameValue model based on the classification.
+        /// </summary>
+        private static NameValue GetNameValueByClassification(PropertyData propertyData)
+        {
+            switch (propertyData.Classification)
+            {
+                case PropertyClassification.Default:
+                case PropertyClassification.UserDefinedType:
+                    return GetDefaultValue(propertyData);
+
+                case PropertyClassification.NullValue:
+                    return GetNullValue(propertyData);
+
+                case PropertyClassification.Datetime:
+                    return GetDatetimeValue(propertyData);
+
+                case PropertyClassification.Array:
+                    return GetArrayValue(propertyData);
+
+                case PropertyClassification.List:
+                    return GetListValue(propertyData);
+
+                default:
+                    return GetDefaultValue(propertyData);
+            }
+        }
+
+        /// <summary>
         /// Returns the Count of a List.
         /// </summary>
-        private static NameValueModel GetListValue(PropertyData propertyData)
+        private static NameValue GetListValue(PropertyData propertyData)
         {
             string valueToShow = "Unknown";
             if (propertyData.Value is ICollection collection)
@@ -57,7 +76,7 @@ namespace PropertiesStringifier
                 valueToShow = collection.Count.ToString();
             }
 
-            return new NameValueModel
+            return new NameValue
             {
                 Name = $"{propertyData.Name}Count",
                 Value = valueToShow
@@ -67,9 +86,9 @@ namespace PropertiesStringifier
         /// <summary>
         /// Returns the length of an array.
         /// </summary>
-        private static NameValueModel GetArrayValue(PropertyData propertyData)
+        private static NameValue GetArrayValue(PropertyData propertyData)
         {
-            return new NameValueModel
+            return new NameValue
             {
                 Name = $"{propertyData.Name}Count",
                 Value = ((Array)propertyData.Value).Length.ToString()
@@ -80,7 +99,7 @@ namespace PropertiesStringifier
         /// Tries to parse the value as a date and if successfull returns it in the format "yyyy-MM-dd".
         /// Otherwise returns the input value itself.
         /// </summary>
-        private static NameValueModel GetDatetimeValue(PropertyData propertyData)
+        private static NameValue GetDatetimeValue(PropertyData propertyData)
         {
             string valueToShow = propertyData.Value.ToString();
             if (DateTime.TryParse(valueToShow, out DateTime resultDate))
@@ -88,7 +107,7 @@ namespace PropertiesStringifier
                 valueToShow = resultDate.ToString("yyyy-MM-dd");
             }
 
-            return new NameValueModel
+            return new NameValue
             {
                 Name = propertyData.Name,
                 Value = valueToShow
@@ -98,9 +117,9 @@ namespace PropertiesStringifier
         /// <summary>
         /// Returns the model for a unknown property type
         /// </summary>
-        private static NameValueModel GetDefaultValue(PropertyData propertyData)
+        private static NameValue GetDefaultValue(PropertyData propertyData)
         {
-            return new NameValueModel
+            return new NameValue
             {
                 Name = propertyData.Name,
                 Value = propertyData.Value.ToString()
@@ -110,9 +129,9 @@ namespace PropertiesStringifier
         /// <summary>
         /// Returns the model for a null value.
         /// </summary>
-        private static NameValueModel GetNullValue(PropertyData propertyData)
+        private static NameValue GetNullValue(PropertyData propertyData)
         {
-            return new NameValueModel
+            return new NameValue
             {
                 Name = propertyData.Name,
                 Value = "null"

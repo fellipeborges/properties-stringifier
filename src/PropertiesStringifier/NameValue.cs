@@ -1,6 +1,6 @@
 ﻿namespace PropertiesStringifier
 {
-    class NameValueModel
+    class NameValue
     {
         public string Name { get; set; }
 
