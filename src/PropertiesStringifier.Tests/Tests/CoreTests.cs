@@ -6,14 +6,13 @@ namespace PropertiesStringifier.Tests
 {
     public class CoreTests
     {
-        
-        /// <summary>
-        /// Assures that the stringified value is covering all properties as expected.
-        /// </summary>
-        [Test]
-        public void StringifyTest()
+        private Actress _actress;
+        private const string EXCEPTED_STRINGIFIED_TEXT = "Name: Natalie Portman Age: 38 IsDead: False BirthDate: 1981-06-09 DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3 MainMediaType: Movies";
+
+        [SetUp]
+        public void Setup()
         {
-            var actress = new Actress
+            _actress = new Actress
             {
                 Name = "Natalie Portman",
                 Age = 38,
@@ -44,9 +43,26 @@ namespace PropertiesStringifier.Tests
                     Spouse = "Benjamin Millepied"
                 }
             };
+        }
 
-            string stringifiedProperties = actress.StringifyProperties();
-            Assert.AreEqual("Name: Natalie Portman Age: 38 IsDead: False BirthDate: 1981-06-09 DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3 MainMediaType: Movies", stringifiedProperties);
+        /// <summary>
+        /// Assures that the method "StringifyProperties()" returns a string that covers all properties as expected.
+        /// </summary>
+        [Test]
+        public void StringifyMethodTest()
+        {
+            string stringifiedProperties = _actress.StringifyProperties();
+            Assert.AreEqual(EXCEPTED_STRINGIFIED_TEXT, stringifiedProperties);
+        }
+
+        /// <summary>
+        /// Assures that the Attribute is overriding the ToString() method and is covering all properties as expected.
+        /// </summary>
+        [Test]
+        public void BaseClassTest()
+        {
+            string stringifiedProperties = _actress.ToString();
+            Assert.AreEqual(EXCEPTED_STRINGIFIED_TEXT, stringifiedProperties);
         }
 
         /// <summary>

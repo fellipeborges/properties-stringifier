@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PropertiesStringifier.Tests
 {
-    public class Actress
+    public class Actress : StringifyProperties
     {
         public string Name { get; set; }
 
