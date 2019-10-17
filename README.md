@@ -54,4 +54,4 @@ public class Actress : StringifyProperties
 }
 ```
 
-That's all.
+That's all. 😊
