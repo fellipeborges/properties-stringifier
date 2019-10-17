@@ -22,15 +22,12 @@ dotnet add package PropertiesStringifier
 `
 
 ## Usage
-First of all, add the using:
-```csharp
-using PropertiesStringifier;
-```
-
-Then you have two ways to implement it.
+Properties Stringifier comes in two flavors:
 
 #### 1 - Overrides the "ToString()"
 ```csharp
+using PropertiesStringifier;
+
 public class Actress
 {
     public string Name { get; set; }
@@ -46,6 +43,8 @@ public class Actress
 
 #### 2 - Inherits from StringifyProperties base class
 ```csharp
+using PropertiesStringifier;
+
 public class Actress : StringifyProperties
 {
     public string Name { get; set; }
