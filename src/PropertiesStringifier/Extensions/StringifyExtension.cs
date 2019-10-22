@@ -13,6 +13,15 @@ namespace PropertiesStringifier
         /// </summary>
         public static string StringifyProperties(this object obj)
         {
+            var notUserDefinedTypeProperties = StringifyProperties(obj, x => !x.IsUserDefinedType);
+            return notUserDefinedTypeProperties;
+        }
+
+        /// <summary>
+        /// Stringifies a class properties in the format "Property: Value" and applies a predicate to filter the properties.
+        /// </summary>
+        internal static string StringifyProperties(this object obj, Func<PropertyData, bool> predicate)
+        {
             try
             {
                 string stringifiedProperties =
@@ -21,7 +30,7 @@ namespace PropertiesStringifier
                         .GetProperties()
                         .ToList()
                         .Select(p => GetPropertyData(obj, p))
-                        .Where(p => !p.IsUserDefinedType)
+                        .Where(predicate)
                         .Select(propertyData => GetNameValueByClassification(propertyData).ToString())
                         .Aggregate("", (prev, next) => $"{prev} {next}")
                         .ToString()

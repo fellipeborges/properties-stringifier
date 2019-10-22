@@ -1,6 +1,6 @@
 ﻿namespace PropertiesStringifier
 {
-    class PropertyData
+    public class PropertyData
     {
         public string Name { get; set; }
 
