@@ -32,10 +32,10 @@ public class Actress
 {
     public string Name { get; set; }
     public int Age { get; set; }
-	public DateTime BirthDate { get; set; }
-	public bool IsDead { get; set; }
+    public DateTime BirthDate { get; set; }
+    public bool IsDead { get; set; }
 
-	// Will return "Name: Natalie Portman Age: 38 BirthDate: 1981-06-09 DeathDate: null IsDead: false"
+    // Will return "Name: Natalie Portman Age: 38 BirthDate: 1981-06-09 DeathDate: null IsDead: false"
     public override string ToString()
     {
         return this.StringifyProperties();
@@ -51,11 +51,11 @@ public class Actress : StringifyProperties
 {
     public string Name { get; set; }
     public int Age { get; set; }
-	public DateTime BirthDate { get; set; }
-	public bool IsDead { get; set; }
+    public DateTime BirthDate { get; set; }
+    public bool IsDead { get; set; }
 	
-	// Method ToString() is already overrided in base class. Nothing to do here.
-	// Will return "Name: Natalie Portman Age: 38 BirthDate: 1981-06-09 DeathDate: null IsDead: false"
+    // Method ToString() is already overrided in base class. Nothing to do here.
+    // Will return "Name: Natalie Portman Age: 38 BirthDate: 1981-06-09 DeathDate: null IsDead: false"
 }
 ```
 
@@ -70,15 +70,15 @@ public class Actress
 {
     public string Name { get; set; }
     public int Age { get; set; }
-	public DateTime BirthDate { get; set; }
-	public bool IsDead { get; set; }
+    public DateTime BirthDate { get; set; }
+    public bool IsDead { get; set; }
 
-	// Will return "Name: Natalie Portman Age: 38"
+    // Will return "Name: Natalie Portman Age: 38"
     public override string ToString()
     {
         return 
-			this
-				.StringifyThisProperty(x => x.Name)
+	    this
+                .StringifyThisProperty(x => x.Name)
                 .AndThisProperty(x => x.Age)
                 .ToString();
     }
@@ -93,15 +93,15 @@ public class Actress
 {
     public string Name { get; set; }
     public int Age { get; set; }
-	public DateTime BirthDate { get; set; }
-	public bool IsDead { get; set; }
+    public DateTime BirthDate { get; set; }
+    public bool IsDead { get; set; }
 
-	// Will return "DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3"
+    // Will return "DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3"
     public override string ToString()
     {
         return 
-			this
-				.StringifyPropertiesExcept(x => x.Name)
+            this
+                .StringifyPropertiesExcept(x => x.Name)
                 .AndExceptThisProperty(x => x.Age)
                 .AndExceptThisProperty(x => x.IsDead)
                 .AndExceptThisProperty(x => x.BirthDate)
