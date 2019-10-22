@@ -96,7 +96,7 @@ public class Actress
     public DateTime BirthDate { get; set; }
     public bool IsDead { get; set; }
 
-    // Will return "DeathDate: null LatestIntervewDatetime: 2019-05-18 12:15:16 MoviesCount: 5 NominationsCount: 3"
+    // Will return "BirthDate: 1981-06-09"
     public override string ToString()
     {
         return 
@@ -104,8 +104,6 @@ public class Actress
                 .StringifyPropertiesExcept(x => x.Name)
                 .AndExceptThisProperty(x => x.Age)
                 .AndExceptThisProperty(x => x.IsDead)
-                .AndExceptThisProperty(x => x.BirthDate)
-                .AndExceptThisProperty(x => x.MainMediaType)
                 .ToString();
     }
 }
