@@ -1,6 +1,6 @@
 ﻿namespace PropertiesStringifier
 {
-    enum PropertyClassification
+    public enum PropertyClassification
     {
         Default = 0,
         NullValue = 1,
