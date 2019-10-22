@@ -4,8 +4,8 @@ namespace PropertiesStringifier
 {
     public class FluentPropertyValue<TSource>
     {
-        private readonly TSource _classInstance;
-        private readonly List<string> _propertiesList;
+        public TSource ClassInstance { get; set; }
+        public List<string> PropertiesList { get; set; }
 
         /// <summary>
         /// Creates a new instance of FluentPropertyValue<TSource> and adds a property name to it.
@@ -14,21 +14,21 @@ namespace PropertiesStringifier
         /// <param name="propertyName">Property name to be added</param>
         public FluentPropertyValue(TSource classInstance, string propertyName)
         {
-            _classInstance = classInstance;
-            _propertiesList = new List<string> { propertyName };
+            ClassInstance = classInstance;
+            PropertiesList = new List<string> { propertyName };
         }
 
         /// <summary>
         /// Creates a new instance of FluentPropertyValue<TSource> based on a previous instance and adds a property name to it.
         /// </summary>
-        /// <param name="fluentPropertyValue">Previous instance of luentPropertyValue<TSource></param>
+        /// <param name="fluentPropertyValue">Previous instance of FluentPropertyValue<TSource></param>
         /// <param name="propertyName">Property name to be added</param>
         public FluentPropertyValue(FluentPropertyValue<TSource> fluentPropertyValue, string propertyName)
         {
-            _classInstance = fluentPropertyValue._classInstance;
-            _propertiesList = new List<string>();
-            _propertiesList.AddRange(fluentPropertyValue._propertiesList);
-            _propertiesList.Add(propertyName);
+            ClassInstance = fluentPropertyValue.ClassInstance;
+            PropertiesList = new List<string>();
+            PropertiesList.AddRange(fluentPropertyValue.PropertiesList);
+            PropertiesList.Add(propertyName);
         }
 
         /// <summary>
@@ -37,8 +37,9 @@ namespace PropertiesStringifier
         public override string ToString()
         {
             return 
-                _classInstance
-                .StringifyProperties(p => _propertiesList.Contains(p.Name));
+                this
+                .ClassInstance
+                .StringifyProperties(p => PropertiesList.Contains(p.Name));
         }
     }
 }
