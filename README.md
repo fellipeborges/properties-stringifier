@@ -1,6 +1,16 @@
-# Properties Stringifier
-[![NuGet](https://img.shields.io/nuget/v/PropertiesStringifier.svg)](https://www.nuget.org/packages/PropertiesStringifier/)
-#### A very simple and fast way to stringify your model class to help you while debugging.
+
+ <h1>Properties Stringifier</h1>
+
+
+<p align="center">A very simple and fast way to stringify your model class to help you while debugging.</p>
+
+<p align="center">
+ <img src="https://img.shields.io/badge/License-MIT-blue.svg">
+  <a href="https://travis-ci.org/fellipeborges/properties-stringifier"><img src="https://travis-ci.org/fellipeborges/properties-stringifier.svg?branch=master"></a>
+  <a href="https://www.nuget.org/packages/PropertiesStringifier"><img src="https://img.shields.io/nuget/v/PropertiesStringifier.svg"></a>
+</p>
+
+
 
 When debugging, instead of seing this:
 ![Without Properties Stringifier](img/without-properties-stringifier.png?raw=true "Without Properties Stringifier")
