@@ -1,4 +1,6 @@
-<p align="center"><b>Properties Stringifier</b></p>
+<p align="center">
+  <img src="img/properties-stringifier-logo.png?raw=true">
+</p>
 <p align="center">A very simple and fast way to stringify your model class to help you while debugging.</p>
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg">
