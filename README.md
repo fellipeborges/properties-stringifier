@@ -1,11 +1,7 @@
-
- <h1>Properties Stringifier</h1>
-
-
+<p align="center"><b>Properties Stringifier</b></p>
 <p align="center">A very simple and fast way to stringify your model class to help you while debugging.</p>
-
 <p align="center">
- <img src="https://img.shields.io/badge/License-MIT-blue.svg">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg">
   <a href="https://travis-ci.org/fellipeborges/properties-stringifier"><img src="https://travis-ci.org/fellipeborges/properties-stringifier.svg?branch=master"></a>
   <a href="https://www.nuget.org/packages/PropertiesStringifier"><img src="https://img.shields.io/nuget/v/PropertiesStringifier.svg"></a>
 </p>
