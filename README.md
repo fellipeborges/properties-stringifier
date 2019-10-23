@@ -8,7 +8,7 @@
   <a href="https://www.nuget.org/packages/PropertiesStringifier"><img src="https://img.shields.io/nuget/v/PropertiesStringifier.svg"></a>
 </p>
 
-
+<hr>
 
 When debugging, instead of seing this:
 ![Without Properties Stringifier](img/without-properties-stringifier.png?raw=true "Without Properties Stringifier")
