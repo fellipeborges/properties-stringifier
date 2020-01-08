@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Fellipe Borges</Authors>
     <Product>Properties Stringifier</Product>
@@ -11,8 +11,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://raw.githubusercontent.com/fellipeborges/properties-stringifier/master/img/properties-stringifier-icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/fellipeborges/properties-stringifier</PackageProjectUrl>
-    <Version>1.0.5</Version>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <Version>1.0.6</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
   </PropertyGroup>
 
 </Project>

@@ -49,15 +49,34 @@ namespace PropertiesStringifier
         /// </summary>
         private static NameValue GetNameValueByClassification(PropertyData propertyData)
         {
-            var nameValue = propertyData.Classification switch
+            NameValue nameValue;
+
+            switch (propertyData.Classification)
             {
-                PropertyClassification.Default => GetDefaultValue(propertyData),
-                PropertyClassification.NullValue => GetNullValue(propertyData),
-                PropertyClassification.Datetime => GetDatetimeValue(propertyData),
-                PropertyClassification.Array => GetArrayValue(propertyData),
-                PropertyClassification.List => GetListValue(propertyData),
-                _ => GetDefaultValue(propertyData)
-            };
+                case PropertyClassification.Default:
+                    nameValue = GetDefaultValue(propertyData);
+                    break;
+
+                case PropertyClassification.NullValue:
+                    nameValue = GetNullValue(propertyData);
+                    break;
+
+                case PropertyClassification.Datetime:
+                    nameValue = GetDatetimeValue(propertyData);
+                    break;
+
+                case PropertyClassification.Array:
+                    nameValue = GetArrayValue(propertyData);
+                    break;
+
+                case PropertyClassification.List:
+                    nameValue = GetListValue(propertyData);
+                    break;
+
+                default:
+                    nameValue = GetDefaultValue(propertyData);
+                    break;
+            }
 
             return nameValue;
         }
